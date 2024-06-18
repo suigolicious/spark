@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<LogOn users={users} setUserInfo={setUserInfo} />} />
-            <Route path="/items" element={<ItemList userInfo={userInfo} setUserInfo={setUserInfo} />} />
+            <Route path="/items" element={<ItemList users={users} userInfo={userInfo} setUserInfo={setUserInfo} />} />
         </Routes>
       </BrowserRouter>
     </div>
