@@ -20,17 +20,7 @@ function ItemList({ userInfo, setUserInfo }: any) {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          "userName": userInfoFinal.userName,
-          // "item1": {
-          //   "W": "100",
-          //   "H": "50"
-          // },
-          // "item2": {
-          //   "W": "200",
-          //   "H": "25"
-          // }
-        })
+        body: JSON.stringify({userInfo: userInfo})
       });
 
       const resultInJSON = await result.json();
@@ -59,22 +49,20 @@ function ItemList({ userInfo, setUserInfo }: any) {
         </div>
       </form>
       </div>
-      {userInfoFinal.map((info: any) => {
-        return (Object.keys(info).map((keyName) => {
-          return (
+      {userInfoFinal[0]?.items.map((info: any) => {
+        return (
+          <div>
+            {info.Name}: 
             <div>
-              {keyName}: 
-              <div>
-                <div>
-                  W: {info[keyName].W}
-                </div>
-                <div>
-                  H: {info[keyName].H}
-                </div>
-              </div>
+              <span>
+                W: {info.W}
+              </span>
+              <span>
+                H: {info.H}
+              </span>
             </div>
-          )
-        }))
+          </div>
+        )
       })}
     </>
   );

@@ -20,9 +20,7 @@ app.get('/getUserInfo', (req, res) => {
 });
 
 app.post('/submitUserInfo', (req, res) => {
-  usersInfo.push(req.body);
-
-  fs.writeFile('../userInfo.json', JSON.stringify(usersInfo), (err) => {
+  fs.writeFile('../userInfo.json', JSON.stringify(req.body), (err) => {
     res.status(201).json({
       status: "success",
       data: {
