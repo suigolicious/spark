@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import './ItemList.scss';
 
 function ItemList({ users, userInfo, setUserInfo }: any) {
   useEffect(() => {
@@ -26,7 +27,6 @@ function ItemList({ users, userInfo, setUserInfo }: any) {
       }
     });
     const updateData = async () => {
-      debugger;
       const result = await fetch('http://localhost:8080/submitUserInfo', {
         method: 'POST',
         headers: {
@@ -43,6 +43,11 @@ function ItemList({ users, userInfo, setUserInfo }: any) {
     updateData();
   };
 
+  const deleteItem = (index: any) => {
+    userInfo && userInfo[0]?.items?.splice(index, 1);
+    setUserInfo([...userInfo]);
+  };
+
   return (
     <>
       <div>
@@ -53,6 +58,7 @@ function ItemList({ users, userInfo, setUserInfo }: any) {
 
             <label htmlFor="w"><b>Width</b></label>
             <input type="text" placeholder="Enter Width" name="w" required />
+
             <label htmlFor="h"><b>Height</b></label>
             <input type="text" placeholder="Enter Height" name="h" required />
 
@@ -61,11 +67,14 @@ function ItemList({ users, userInfo, setUserInfo }: any) {
           </div>
         </form>
       </div>
-      {userInfo && userInfo[0]?.items?.map((info: any) => {
+      {userInfo && userInfo[0]?.items?.map((info: any, index: number) => {
         return (
           <div>
             {info.Name}:
-            <div>
+            <button type="button" onClick={() => { deleteItem(index) }}>
+              X
+            </button>
+            <div className="item-dimensions">
               <span>
                 W: {info.W}
               </span>
